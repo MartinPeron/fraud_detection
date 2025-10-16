@@ -1,0 +1,4 @@
+.env
+fraud_detection/
+mlruns/
+.DS_Store
