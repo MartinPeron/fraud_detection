@@ -2,3 +2,7 @@
 fraud_detection/
 mlruns/
 .DS_Store
+*.log
+**/logs/*
+*.pyc
+*.csv
