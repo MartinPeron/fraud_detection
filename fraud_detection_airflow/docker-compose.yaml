@@ -59,11 +59,16 @@ x-airflow-common:
     AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth'
     AIRFLOW__WEBSERVER__AUTHENTICATE: 'False'
     _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
+    DATA_PATH: /opt/airflow/data/fraudTest_real_time.csv
+    MLFLOW_TRACKING_URI: http://host.docker.internal:5000
+    MLFLOW_EXPERIMENT_NAME: fraud_detection_exp
+    AWS_BUCKET_NAME: jedhaparis
+    AWS_DATA_SAVE_PATH: fraud_detection_artifacts/input_output/
+    ALERT_EMAIL: mpqpuc1@outlook.com
   volumes:
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
     - ./plugins:/opt/airflow/plugins
-    - ../.env:/opt/airflow/.env
     - ./data:/opt/airflow/data
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
@@ -238,7 +243,7 @@ services:
       _AIRFLOW_DB_MIGRATE: 'true'
       _AIRFLOW_WWW_USER_CREATE: 'true'
       _AIRFLOW_WWW_USER_USERNAME: ${_AIRFLOW_WWW_USER_USERNAME:-airflow}
-      _AIRFLOW_WWW_USER_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD:-airflow}
+      _AIRFLOW_WWW_USER_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD:-a}
       _PIP_ADDITIONAL_REQUIREMENTS: ''
     user: "0:0"
     volumes:
