@@ -150,7 +150,6 @@ def send_alert_email(**context):
     <p>A potential fraudulent transaction was detected.</p>
     <ul>
         <li><b>Run ID:</b> {prediction['run_id']}</li>
-        <li><b>Expected:</b> {prediction['expected']}</li>
         <li><b>Predicted:</b> {prediction['prediction']}</li>
     </ul>
     <pre>{prediction['data']}</pre>

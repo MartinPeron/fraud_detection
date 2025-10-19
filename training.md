@@ -1,13 +1,20 @@
-flowchart LR
+flowchart TD
 
+    K[Test Metrics]
     %% --- LOCAL ENVIRONMENT ---
-    subgraph L[Training]
+    subgraph L[Training Pipeline]
         A[Load Data Source: Fraud Transactions CSV]
         B[Feature Creation and Engineering]
         C1[Model Training]
         C2[Model Prediction]
         A --> B --> C1 --> C2
     end
+    C2 --> K
+
+    %% --- FEATURES + MODEL BUNDLE ---
+    H[Features + Model]
+    B --> H
+    C1 --> H
 
     %% --- MLFLOW INFRASTRUCTURE ---
     subgraph M[MLflow Tracking Infrastructure]
@@ -26,22 +33,15 @@ flowchart LR
         end
     end
 
-    %% --- CONNECTIONS BETWEEN BLOCKS ---
-    %% Training phase connections
-    B --> D
-    C1 --> D
-    D --> F
-    D --> G
+    %% --- DASHBOARD ---
+    J[Metrics Visualization Dashboard]
 
-    %% Prediction phase connections
-    C2 --> D
-    C2 --> H[Prediction Metrics]
-    H --> G
-
-    %% MLflow visualization
+    %% --- CONNECTIONS ---
+    H --> D
+    K --> D
     E --> F
     E --> G
-    E --> I[Metrics Visualization Dashboard]
+    E --> J
 
     %% --- STYLING ---
     classDef io fill:#dfe9f3,stroke:#6b7a8f,stroke-width:1px,color:#000;
@@ -49,6 +49,4 @@ flowchart LR
     classDef infra fill:#fff4e6,stroke:#e69500,stroke-width:1px,color:#000;
 
     class A,B,C1,C2 process
-    class D,E infra
-    class F,G infra
-    class H,I io
+    class D,E,F,G infra
